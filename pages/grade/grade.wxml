@@ -1,0 +1,59 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <modal-view title="更新数据" bindonshow="updateShow" show="{{showUpdate}}">
+        <view class="form">
+            <view class="list-item">
+                <text class="list-item-title">姓名</text>
+                <text>{{name}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">学号</text>
+                <text>{{studentid}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">验证码</text>
+                <input type="text" bindinput="inCode" value="{{code}}" style="width:calc(100% - 270rpx)" />
+                <image class="code-image" bindtap="updateCode" src="{{codeString}}" />
+            </view>
+            <view class="modal-button" bindtap="getData">更新</view>
+        </view>
+    </modal-view>
+    <picker mode="selector" range="{{terms}}" value="{{toView==''?0:util.getTermNum(terms,util.termId2term(toView))}}" bindchange="filterData">
+        <image class="filter" src="/images/filter.png" />
+    </picker>
+    <scroll-view style="height:100%;display:flex;flex-direction:column" scroll-into-view="{{toView}}" scroll-y="{{true}}">
+        <view class="top-container">
+            <text class="gpa">平均学分绩点：{{gpa}}</text>
+            <view class="plain-button update" bindtap="updateGrade">更新成绩数据</view>
+        </view>
+        <block wx:for="{{data}}" wx:key="name+ep">
+            <view wx:if="{{index>0&&data[index].term!=data[index-1].term}}" class="term-divider">
+                <text id="t{{item.term}}">{{item.term}}</text>
+            </view>
+            <view class="card" id="{{index==0?('t'+item.term):''}}">
+                <view class="card-header">
+                    <text class="lesson">{{item.name}}</text>
+                    <view class="total">
+                        <text style="margin-right:10rpx">总评 :</text>
+                        <text class="score" style="color:{{util.getScoreColor(item.total)}}">{{item.total}}</text>
+                    </view>
+                </view>
+                <view class="card-row">
+                    <text>学分：{{item.credit}}</text>
+                    <text>学时：{{item.duration}}</text>
+                    <text hidden="{{item.gpa==null}}">学分绩点：{{item.gpa}}</text>
+                </view>
+                <view class="card-row">
+                    <text>考核方式：{{item.am}}</text>
+                    <text>考试性质：{{item.ep}}</text>
+                </view>
+                <view class="card-row">
+                    <text>开课学期：{{item.term}}</text>
+                    <text>课程性质：{{item.lp}}</text>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+</view>

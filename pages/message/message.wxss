@@ -1,0 +1,165 @@
+::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.container{
+    background-color: white;
+}
+
+.class-info{
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 170rpx;
+    margin-top: 72rpx;
+}
+
+.class-info image{
+    width: 120rpx;
+    height: 120rpx;
+    margin-left: 50rpx;
+    margin-right: 30rpx;
+}
+
+.class-info-text{
+    flex-direction: column;
+    margin-left: 20rpx;
+}
+
+.class-info-prim{
+    font-size: 40rpx;
+}
+
+.class-info-sec{
+    font-size: 25rpx;
+    margin-top: 10rpx;
+    color: #cccccc;
+}
+
+.top-container{
+    width: 100%;
+    flex-direction: column;
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+}
+
+.top-item{
+    flex-direction: row;
+    align-items: center;
+    margin: 0px 20rpx;
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+}
+
+.top-item text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.message-container{
+    flex-direction: column;
+    height: 1000rpx;
+}
+
+.notice-item{
+    flex-direction: column;
+}
+
+.notice-info{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20rpx;
+    margin-bottom: 10rpx;
+}
+
+.notice-info image{
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.notice-sender-text{
+    flex-direction: column;
+    margin-left: 20rpx;
+}
+
+.notice-type{
+    align-items: center;
+}
+
+.notice-type image{
+    width: 30rpx;
+    height: 30rpx;
+}
+.notice-article{
+    flex-direction: column;
+    margin: 0rpx 20rpx;
+}
+
+.qn-item{
+    flex-direction: row;
+}
+
+.qn-item image{
+    width: 70rpx;
+    height: 70rpx;
+    margin: 20rpx;
+}
+
+.qn-content{
+    flex-direction: column;
+}
+
+.qn-block{
+    flex-direction: row;
+    height: 135rpx;
+    min-width: 400rpx;
+    margin-right: 20rpx;
+    padding-right: 20rpx;
+    align-items: center;
+    border: 1rpx solid #eaeaea;
+    border-radius: 10rpx;
+    margin-bottom: 10rpx;
+}
+
+.qn-block image{
+    width: 64rpx;
+    height: 64rpx;
+}
+
+.class-info-text .divider{
+    margin: 10rpx 0rpx;
+}
+
+.loading{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    background-color: #f2f2f2;
+}
+
+.loading text{
+    font-size: 35rpx;
+    color: #888888;
+}
+
+.loading image{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 20rpx;
+}
+
+.mask{
+    font-size: 40rpx;
+    height: 100%;
+    width: 100%;
+    background-color: #f2f2f2;
+    justify-content: center;
+    align-items: center;
+    color: #888888;
+}

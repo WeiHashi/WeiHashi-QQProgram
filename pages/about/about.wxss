@@ -1,0 +1,34 @@
+.container{
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    height: unset !important;
+    min-height: 100%;
+    padding-bottom: 20px;
+}
+
+.logo{
+    width: 200rpx;
+    height: 200rpx;
+    align-self: center;
+    margin-top: 50rpx;
+    overflow: unset;
+}
+
+.app-label{
+    text-align: center;
+    font-weight: bold;
+    color: #c1272d;
+    margin: 20rpx;
+    font-size: 60rpx;
+}
+
+.title{
+    color: #c1272d;
+    font-weight: bold;
+    font-size: 36rpx;
+    margin: 20rpx 0rpx;
+}
+
+.tip{
+    color: black;
+}

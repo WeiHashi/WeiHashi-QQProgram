@@ -1,0 +1,153 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <modal-view title="导入课程" bindonshow="importShow" show="{{showImport}}">
+        <view class="form">
+            <view class="list-item">
+                <text class="list-item-title">姓名</text>
+                <text>{{name}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">学号</text>
+                <text>{{studentid}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">验证码</text>
+                <input type="text" bindinput="inCode" value="{{code}}" placeholder="验证码" style="width:calc(100% - 270rpx)" />
+                <image class="code-image" bindtap="updateCode" src="{{codeString}}" />
+            </view>
+            <view bindtap="doImport" class="modal-button">{{buttonText}}</view>
+        </view>
+        <text class="tip" style="text-align:center;margin-top:10rpx">导入课程后手动添加的课程会消失</text>
+    </modal-view>
+    <modal-view title="添加课程" show="{{showAdd}}">
+        <form class="form" bindsubmit="addSubmit">
+            <view class="list-item">
+                <text class="list-item-title">课程名</text>
+                <input type="text" name="lessonName" placeholder="课程名" style="width:calc(100% - 120rpx)" />
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">课节</text>
+                <picker mode="multiSelector" name="lessonPart" bindchange="partChange" bindcolumnchange="partColumnChange" value="{{partIndex}}" range="{{parts}}">
+                    <view class="picker">
+                        {{parts[0][partIndex[0]]}} 第{{parts[1][partIndex[1]]}}节 至 第{{parts[2][partIndex[2]]}}节
+                    </view>
+                </picker>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item" style="height:unset;padding-top:15rpx;padding-bottom:15rpx">
+                <text class="list-item-title">教学周</text>
+                <view style="flex-direction:column;width:calc(100% - 120rpx)">
+                    <checkbox-group bindchange="addWeekChange">
+                        <label class="checkbox" wx:for="{{weekChecks}}" wx:key="index">
+                            <checkbox class="week-box" checked="{{item}}" style="{{item?'border:1rpx solid #c1272d;color:#c1272d':''}}" value="{{index}}">
+                                {{index+1}}
+                            </checkbox>
+                        </label>
+                    </checkbox-group>
+                    <view class="weeks-fast">
+                        <text bindtap="singleWeek">单周</text>
+                        <text bindtap="multiWeek">双周</text>
+                        <text bindtap="allWeek">全选</text>
+                    </view>
+                </view>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">教师</text>
+                <input type="text" name="lessonTeacher" placeholder="教师" style="width:100%" />
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">教室</text>
+                <input type="text" name="lessonPlace" placeholder="教室" style="width:100%" />
+            </view>
+            <button form-type="submit" vlaue="添加" style="line-height:unset" class="modal-button">添加</button>
+        </form>
+    </modal-view>
+    <modal-view class="lesson-detail" title="课程详情" show="{{showDetail}}">
+        <view class="form">
+            <view class="list-item">
+                <text class="list-item-title">课程名</text>
+                <text>{{lessonDetail.lessonItem.name}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">课节</text>
+                <text>第{{lessonDetail.partItem.start}}节 - 第{{lessonDetail.partItem.end}}节</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">教室</text>
+                <text>{{lessonDetail.partItem.place}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">教学周</text>
+                <text style="padding-top:5rpx;padding-bottom:5rpx">{{lessonDetail.partItem.weeks}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">教师</text>
+                <text>{{lessonDetail.lessonItem.teacher}}</text>
+            </view>
+            <view class="plain-button" bindtap="deleteThis">删除本节</view>
+            <view class="plain-button" bindtap="deletePart">删除同时间</view>
+            <view class="plain-button" bindtap="deleteLesson">删除本课程</view>
+        </view>
+    </modal-view>
+    <view class="action-bar" style="height:{{capHeight}}px;padding-top:{{capTop}}px">
+        <image bindtap="back" src="/images/arrow-left.png" />
+        <text>我的课表</text>
+        <view></view>
+    </view>
+    <view class="option-bar">
+        <image bindtap="import" src="/images/import.png" />
+        <picker range="{{weeks}}" disabled="{{currentWeek=='暂无数据'}}" style="height:70rpx" value="{{weekIndex<-1?0:weekIndex}}" bindchange="chooseWeek">
+            <view class="weekth">
+                <text>{{currentWeek}}</text>
+                <image src="/images/arrow-down.png" />
+            </view>
+        </picker>
+        <image src="/images/add.png" bindtap="add" />
+    </view>
+    <view class="content">
+        <view class="date-bar">
+            <view class="month-block">
+                <text>{{util.getMonth(weekStart)}}</text>
+                <text>月</text>
+            </view>
+            <block wx:for="{{parts[0]}}" wx:key="item">
+                <view class="weekday-block" style="{{util.ifToday(weekStart,index)?'background-color:rgba(171, 171, 171,0.3)':''}}">
+                    <text>{{item}}</text>
+                    <text class="weekday-date">{{util.getWeekDate(weekStart,index)}}</text>
+                </view>
+            </block>
+        </view>
+        <scroll-view style="height:100%;" scroll-y="{{true}}">
+            <view class="lessons-container">
+                <view wx:for-index="indicatorIndex" wx:if="{{indicatorIndex!=0}}" wx:for="{{orders}}" wx:key="order" style="margin-top:{{(item.order-1)*120-1}}rpx" class="indicator" />
+                <block wx:for="{{orders}}" wx:key="order">
+                    <view class="time-block" style="margin-top:{{(item.order-1)*120}}rpx">
+                        <text class="order">{{item.order}}</text>
+                        <text>{{item.start}}</text>
+                        <text>{{item.end}}</text>
+                    </view>
+                </block>
+                <block wx:for="{{lessons}}" wx:key="name+teacher" wx:for-item="lessonItem">
+                    <block wx:for="{{lessonItem.parts}}" wx:key="weekday+start+end" wx:for-item="partItem">
+                        <block wx:for="{{partItem.weeks}}" wx:key="item" wx:for-item="weekItem">
+                            <view wx:if="{{weeks[weekIndex]==weekItem}}" style="margin-left:{{util.getML(partItem.weekday)}};margin-top:{{(partItem.start-1)*120}}rpx;height:{{(partItem.end-partItem.start+1)*120}}rpx" class="lesson-block">
+                                <view bindtap="lessonDetail" data-lessonItem="{{lessonItem}}" data-partItem="{{partItem}}" data-weekItem="{{weekItem}}" class="lesson" style="background:{{lessonItem.bg}}">
+                                    <text>{{lessonItem.name}}\n@{{partItem.place}}</text>
+                                </view>
+                            </view>
+                        </block>
+                    </block>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,238 @@
+::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.container{
+    background-color: #f2f2f2;
+}
+.action-bar{
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+.action-bar image{
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 20rpx;
+}
+
+.action-bar text{
+    font-size: 42rpx;
+}
+
+.action-bar view{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 20rpx;
+}
+
+.option-bar{
+    width: 100%;
+    height: 70rpx;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.option-bar image{
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.weekth{
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-start;
+}
+
+.weekth text{
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #c1272d;
+}
+
+.weekth image{
+    width: 24rpx;
+    height: 24rpx;
+    margin-left: 10rpx;
+}
+
+.content{
+    width: 100%;
+    height: calc(100% - 190rpx);
+    background: #f2f2f2;
+    flex-direction: column;
+}
+
+.date-bar{
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 100%;
+    height: 75rpx;
+    position: fixed;
+    z-index: 10;
+}
+
+.month-block{
+    width: 9%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.month-block text{
+    font-size: 24rpx;
+    text-align: center;
+    font-weight: bold;
+}
+
+.weekday-block{
+    width: 13%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.weekday-block text{
+    font-size: 28rpx;
+    text-align: center;
+    font-weight: bold;
+}
+
+.weekday-date{
+    font-size: 20rpx !important;
+}
+
+.lessons-container{
+    width: 100%;
+    flex-direction: row;
+    padding-top: 75rpx;
+}
+
+
+.time-block{
+    height: 120rpx;
+    width: 9%;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.order{
+    font-size: 28rpx !important;
+}
+
+.time-block text{
+    font-size: 20rpx;
+    text-align: center;
+}
+
+.lesson-block{
+    width: 13%;
+    height: 240rpx;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 9;
+}
+
+.lesson{
+    flex-direction: column;
+    padding: 5rpx;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    height: calc(100% - 7rpx);
+    width: calc(100% - 7rpx);
+}
+
+.lesson text{
+    display: flex;
+    color: white;
+    font-size: 25rpx;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.indicator{
+  z-index:8;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  border-top: 1rpx dashed #ababab
+}
+
+.form{
+    flex-direction: column;
+}
+
+.week-box .wx-checkbox-input{
+    display: none;
+}
+
+.week-box{
+    border: 1rpx solid #ababab;
+    color: #ababab;
+    border-radius: 7rpx;
+    margin: 0rpx 5rpx;
+    min-width: 40rpx;
+    padding-left: 5rpx;
+    padding-right: 5rpx;
+    padding-top: 3rpx;
+    padding-bottom: 3rpx;
+    font-size: 25rpx;
+    margin-top: 3rpx;
+    text-align: center;
+}
+
+.week-box .wx-checkbox-input.wx-checkbox-input-checked{
+    border: #c1272d;
+    background: #c1272d;
+    font-weight: bold;
+}
+
+.list-item-title{
+    width: 120rpx;
+}
+
+.code-image{
+    height: 60rpx;
+    width: 150rpx;
+}
+
+.lesson-detail .list-item{
+    min-height: 80rpx;
+    height: unset;
+}
+
+.lesson-detail .list-item-title{
+    width: 100rpx;
+}
+
+.lesson-detail .list-item text{
+    word-wrap: break-word;
+    max-width: calc(100% - 120rpx);
+}
+
+.lesson-detail .plain-button{
+    margin-top: 20rpx;
+    padding-top: 10rpx;
+    padding-bottom: 10rpx;
+}
+
+.weeks-fast{
+    margin-top: 10rpx;
+}
+
+.weeks-fast text{
+    color: #c1272d;
+    font-size: 30rpx;
+    margin-right: 20rpx;
+}

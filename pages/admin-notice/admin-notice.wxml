@@ -1,0 +1,22 @@
+<view class="container">
+    <form bindsubmit="submit">
+        <view class="list-item">
+            <text class="list-item-title">标题</text>
+            <input name="title" placeholder="标题" value="{{none}}" maxlength="50" style="width:100%" />
+        </view>
+        <view class="divider" style="margin:0rpx"></view>
+        <view class="list-item" style="height:300rpx;align-items:flex-start;padding-top:10rpx;padding-bottom:10rpx">
+            <text class="list-item-title">正文</text>
+            <textarea placeholder="正文" bindinput="inContent" show-confirm-bar="{{false}}" style="width:100%;height:calc(100% - 20rpx);white-space:pre-wrap" />
+        </view>
+        <view class="divider"></view>
+        <view class="list-item">
+            <text class="list-item-title">分类</text>
+            <picker mode="selector" range="{{cates}}" name="cate" value="{{cateIndex}}" bindchange="cateChange" >
+                {{cates[cateIndex]}}
+            </picker>
+        </view>
+        <button form-type="submit" style="width:400rpx;font-size:32rpx" class="modal-button">发布</button>
+    </form>
+    <text class="tip" style="margin:20rpx;margin-top:30rpx">Tips：每个班级最多可置顶3条通知或问卷(置顶通知和问卷总和不超过3条)，请妥善使用置顶功能。</text>
+</view>

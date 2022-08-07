@@ -1,0 +1,63 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <modal-view title="温馨提示" show="{{showTip}}">
+        <view style="flex-direction:column">
+            <view style="text-indent:2em;color:#666666;font-size:35rpx;text-align: justify;">
+                微哈师已全面适配新版教务平台，使用教务平台相关功能前请先到“我的”页面绑定新版教务平台账号。针对已绑定旧版教务平台账号的部分用户，系统会自动进行解绑操作，未自动解绑的用户请手动解绑或到“我的”-“设置”页面清除全部数据，然后重新绑定新版教务平台账号。
+            </view>
+            <view class="modal-button" bindtap="closeTip">我知道了，不再提示</view>
+        </view>
+    </modal-view>
+    <modal-view title="维护中……" closeable="{{false}}" show="{{maintenance}}">
+        <view style="flex-direction:column;color:#666666">
+            <view style="text-indent:2em;font-size:35rpx;text-align: justify;;min-height:100rpx">
+                微哈师正在维护中，维护时间：{{util.timestamp2date(maintenanceStart)}}至{{util.timestamp2date(maintenanceEnd)}}，敬请期待。
+            </view>
+            <text style="text-align:right;margin-top:20rpx">Meteor</text>
+        </view>
+    </modal-view>
+    <swiper bindchange="bannerChange" autoplay interval="5000" duration="1000" circular>
+        <block wx:for="{{banners}}" wx:key="url">
+            <swiper-item>
+                <view class="swiper-item">
+                    <image src="{{item.url}}" data-item="{{item}}" bindtap="bannerTap" />
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="dot-container">
+        <view class="dot-wrapper">
+            <block wx:for="{{banners}}" wx:key="url" wx:for-index="bannerIndex">
+                <view class="dot {{bannerIndex==bannerCur?'dot-this':''}}"></view>
+            </block>
+        </view>
+    </view>
+    <view class="function-row">
+        <block wx:for="{{functions}}" wx:key="img">
+            <navigator url="/pages/{{item.page}}" style="width:25%">
+                <view class="function-block">
+                    <image src="/images/home_{{item.img}}.png" />
+                    <text>{{item.text}}</text>
+                </view>
+            </navigator>
+        </block>
+    </view>
+    <text style="margin-left:20rpx;margin-top:30rpx;font-size:45rpx">今日课程</text>
+    <view class="today-lesson-container">
+        <view class="today-item">
+            <text class="today-column today-header">课程名称</text>
+            <text class="today-column today-header">上课时间</text>
+            <text class="today-column today-header">上课地点</text>
+        </view>
+        <block wx:for="{{today}}" wx:key="time" wx:for-index="todayIndex">
+            <view class="today-item" bindtap="toTimetable" style="background-color:{{todayIndex%2==0?'#f2f2f2':'white'}}">
+                <text class="today-column">{{item.name}}</text>
+                <text class="today-column">{{item.time}}</text>
+                <text class="today-column">{{item.place}}</text>
+            </view>
+        </block>
+        <view wx:if="{{today.length==0}}" style="width:100%;height:540rpx;flex-direction:colum;justify-content:center;align-items:center;background-color:#fafafa">
+            <text style="color:#ababab">今天没有课，可以好好休息一下</text>
+        </view>
+    </view>
+</view>

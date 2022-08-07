@@ -1,0 +1,5 @@
+.p{
+    font-size:36rpx;
+    margin-top:20rpx;
+    text-indent:2em
+}

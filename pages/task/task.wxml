@@ -1,0 +1,115 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <modal-view class="add-modal" title="添加任务" show="{{showAdd}}" bindonshow="showAdd">
+        <form bindsubmit="add">
+            <view class="list-item">
+                <view class="list-item-title">任务名称</view>
+                <input name="taskName" value="{{taskName}}" placeholder="任务名称" bindinput="inTaskName" />
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <view class="list-item-title">日期</view>
+                <picker mode="date" value="{{taskDate}}" start="{{nowDate}}" bindchange="dateChange">
+                    <view>{{taskDate}}</view>
+                </picker>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <view class="list-item-title">时间</view>
+                <picker mode="time" value="{{taskTime}}" bindchange="timeChange">
+                    <view>{{taskTime}}</view>
+                </picker>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">是否提醒</text>
+                <radio-group class="radio-group" bindchange="remindChange">
+                    <label class="radio">
+                        <radio style="margin:0rpx" value="不提醒" checked="{{remind=='不提醒'}}">不提醒</radio>
+                    </label>
+                    <label class="radio">
+                        <radio value="提醒" checked="{{remind=='提醒'}}">提醒</radio>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view wx:if="{{remind=='提醒'}}" class="list-item">
+                <text class="list-item-title">提醒方式</text>
+                <checkbox-group bindchange="remindTypeChange">
+                    <label class="checkbox">
+                        <checkbox style="margin:0rpx" value="push">系统消息</checkbox>
+                        <checkbox value="mail">电子邮件</checkbox>
+                    </label>
+                </checkbox-group>
+            </view>
+            <button form-type="submit"  class="modal-button">添加</button>
+            <view class="tip" style="margin-top:20rpx;text-indent:0em;line-height:30rpx">Tips：设置提醒之后任务将无法更改，待任务时间过后可以删除，仅当任务时间距当前7天内时可设置系统消息提醒。</view>
+        </form>
+    </modal-view>
+    <modal-view class="detail-modal" title="任务详情" show="{{showDetail}}">
+        <form bindsubmit="save">
+            <view class="list-item">
+                <text class="list-item-title">任务名称</text>
+                <input disabled="{{detail.remind.length!=0}}" value="{{detail.name}}" bindinput="inDetailName"/>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">日期</text>
+                <picker disabled="{{detail.remind.length!=0}}" mode="date" value="{{util.date2timestamp(detail.updated.taskTime).date}}" start="{{nowDate}}" bindchange="detailDateChange">
+                    <view>{{util.date2timestamp(detail.updated.taskTime).date}}</view>
+                </picker>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">时间</text>
+                <picker disabled="{{detail.remind.length!=0}}" mode="time" value="{{util.date2timestamp(detail.updated.taskTime).time}}" bindchange="detailTimeChange">
+                    <view>{{util.date2timestamp(detail.updated.taskTime).time}}</view>
+                </picker>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">是否提醒</text>
+                <radio-group class="radio-group" bindchange="detailRemindChange">
+                    <label class="radio">
+                        <radio disabled="{{detail.remind.length!=0}}" style="margin:0rpx" value="不提醒" checked="{{detail.remind.length==0}}">不提醒</radio>
+                    </label>
+                    <label class="radio">
+                        <radio disabled="{{detail.remind.length!=0}}" value="提醒" checked="{{detail.remind.length!=0}}">提醒</radio>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view wx:if="{{detail.remind.length!=0||detailRemind=='提醒'}}" class="list-item">
+                <text class="list-item-title">提醒方式</text>
+                <checkbox-group bindchange="detailRemindTypeChange">
+                    <label class="checkbox">
+                        <checkbox style="margin:0rpx" disabled="{{detail.remind.length!=0}}" value="push" checked="{{util.checkElem(detail.remind,'push')}}">系统消息</checkbox>
+                        <checkbox value="mail" disabled="{{detail.remind.length!=0}}" checked="{{util.checkElem(detail.remind,'mail')}}">电子邮件</checkbox>
+                    </label>
+                </checkbox-group>
+            </view>
+            <button wx:if="{{detail.remind.length==0}}" form-type="submit" class="modal-button">保存</button>
+            <view wx:if="{{detail.remind.length==0||(detail.remind.length!=0&&util.earlyThanNow(detail.taskTime))}}" bindtap="detailDelete" style="margin-top:20rpx" class="plain-button">删除</view>
+        </form>
+    </modal-view>
+    <image class="add-task" bindtap="addTask" src="/images/add_task.png" />
+    <view wx:if="{{tasks.length==0}}" style="width:100%;height:100%;flex-direction:colum;justify-content:center;align-items:center">
+        <text style="color:#ababab">还没有任务，去添加一个吧</text>
+    </view>
+    <scroll-view wx:else style="height:100%;" scroll-y="{{true}}">
+        <view class="gap"></view>
+        <block wx:for="{{tasks}}" wx:key="index">
+            <view class="list-item" data-task="{{item}}" data-index="{{index}}" bindtap="showDetail">
+                <view class="task-info">
+                    <text class="task-title">{{item.name}}</text>
+                    <text>{{util.timestamp2date(item.taskTime)}}</text>
+                </view>
+                <view class="reminds">
+                    <image wx:if="{{util.checkElem(item.remind,'push')}}" src="/images/remind_push.png" />
+                    <image wx:if="{{util.checkElem(item.remind,'mail')}}" src="/images/remind_mail.png" />
+                </view>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+        </block>
+    </scroll-view>
+</view>

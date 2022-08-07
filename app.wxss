@@ -1,0 +1,127 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+page{
+    width: 100%;
+    height: 100%;
+}
+view{
+  display: flex;
+}
+
+.divider{
+  height: 1px;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+
+.gap{
+  width: 100%;
+  height: 20rpx;
+  background-color: #f2f2f2;
+}
+
+.list-item{
+  height: 80rpx;
+  width: 100%;
+  align-items: center;
+  font-size: 32rpx;
+  background-color: white;
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.list-item-title{
+  margin-right: 30rpx;
+  width: 100rpx;
+}
+
+.modal-button{
+  width: 100%;
+  background-color: #c1272d;
+  border-radius: 1000rpx;
+  color: white;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  line-height:unset
+}
+
+.form{
+  flex-direction: column;
+}
+
+.plain-button{
+  font-size: 28rpx;
+  height: 32rpx;
+  justify-content: center;
+  display: flex;
+  border: 1rpx solid #c1272d;
+  border-radius: 30rpx;
+  color: #c1272d;
+  align-items: center;
+  padding-left: 5rpx;
+  padding-right: 5rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+}
+
+.tip{
+  color: #808080;
+  text-indent: 2em;
+  font-size: 28rpx;
+}
+
+checkbox{
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+
+checkbox .wx-checkbox-input{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+width: 20rpx;
+height: 20rpx;  
+line-height: 20rpx;
+text-align: center;
+font-size: 22rpx;
+color: #fff;
+background: transparent;
+transform: translate(-50%, -50%) scale(1);
+-webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+radio{
+  margin-left: 20rpx;
+}
+
+radio .wx-radio-input{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 20rpx;
+  height: 20rpx;  
+  line-height: 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

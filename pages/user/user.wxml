@@ -1,0 +1,77 @@
+<view class="container">
+    <modal-view title="{{name=='未绑定'?'绑定教务平台':'已绑定'}}" bindonshow="onBindShow" show="{{showBind}}">
+        <form wx:if="{{name=='未绑定'}}" bindsubmit="bindSubmit">
+            <view class="list-item">
+                <text class="list-item-title">学号</text>
+                <input name="username" value="{{submit.username}}" placeholder="学号" />
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">密码</text>
+                <input name="password" value="{{submit.password}}" type="password" placeholder="密码" />
+            </view>
+            <button form-type="submit" class="modal-button">绑定</button>
+            <view class="tip">Tips：由于此功能基于教务平台实现，只能在教务平台可用时使用，如提示连接失败，请访问新版教务平台http://202.118.128.11:9980/jsxsd/，如能正常访问可重新打开本页面尝试。</view>
+        </form>
+        <view wx:if="{{name!='未绑定'}}" class="form">
+            <view class="list-item">
+                <view class="list-item-title">姓名</view>
+                <text>{{name}}</text>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <view class="list-item-title">学号</view>
+                <text>{{studentid}}</text>
+            </view>
+            <view class="plain-button" bindtap="unbindJw" style="margin-top:30rpx">解绑</view>
+            <view class="tip">Tips：解绑将同时清除所有数据（包括课程数据和成绩数据等）。</view>
+        </view>
+    </modal-view>
+    <modal-view title="{{email==''?'绑定邮箱':'已绑定'}}" show="{{showMail}}" bindonshow="onMailShow">
+        <view wx:if="{{email==''}}" class="form">
+            <view class="list-item">
+                <text class="list-item-title">邮箱</text>
+                <input placeholder="邮箱地址" bindinput="inMailAddr" value="{{mailAddr}}" />
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title">验证码</text>
+                <input placeholder="邮箱验证码" bindinput="inMailCode" value="{{mailCode}}" style="width:210rpx" />
+                <text style="color:{{leftTime==0?'#c1272d':'#ababab'}}" bindtap="getMailCode">获取验证码{{leftTime==0?'':'('+leftTime+')'}}</text>
+            </view>
+            <button class="modal-button" bindtap="bindMail">绑定</button>
+        </view>
+        <view wx:else class="form">
+            <view class="list-item">
+                <text class="list-item-title">邮箱</text>
+                <text>{{email}}</text>
+            </view>
+            <view class="plain-button" style="margin-top:20rpx" bindtap="unbindMail">解绑</view>
+        </view>
+    </modal-view>
+    <image style="width:100%" src="/images/mine_bg.jpg" mode="aspectFill" />
+    <view class="page-content">
+        <view class="header-container">
+            <image src="{{head}}" />
+            <view class="user-info">
+                <text class="nickname">{{nickname}}</text>
+                <view class="tag-container">
+                    <text class="tag" style="background-color:{{name=='未绑定'?'#cccccc':'#009245'}}">{{name}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="function-items">
+            <block wx:for="{{functions}}" wx:key="icon">
+                    <button class="function-item" data-item="{{item}}" bindtap='navigate' open-type="{{item.page=='feedback'?'feedback':''}}{{item.page=='share'?'share':''}}" share-mode="{{['recentContacts','qq', 'qzone','quickToDialog','wechatFriends','wechatMoment']}}">
+                        <view>
+                            <image class="function-icon" src="/images/user_{{item.icon}}.png" />
+                            <text>{{item.text}}</text>
+                        </view>
+                        <image class="arrow" src="/images/arrow-right.png" />
+                    </button>
+                <view class="divider" style="margin:0rpx"></view>
+            </block>
+        </view>
+        <text class="copyright">Copyright © 2019-2020 Meteor. All right reserved.</text>
+    </view>
+</view>

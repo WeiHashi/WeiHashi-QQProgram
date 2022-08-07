@@ -1,0 +1,9 @@
+<view class="mask" hidden="{{!visible}}" catchtouchmove="nullEvent">
+  <view class="modal" style="-webkit-animation: {{anim}} 0.3s; animation: {{anim}} 0.3s;">
+    <view class="modal-header">
+      <text class="modal-title">{{title}}</text>
+      <image class="modal-close" hidden="{{!closeable}}" bindtap="close" src="/images/close.png" />
+    </view>
+    <slot></slot>
+  </view>
+</view>

@@ -1,0 +1,58 @@
+.list-item{
+    justify-content: space-between;
+    height: 120rpx;
+}
+
+.task-info{
+    flex-direction: column;
+}
+
+.task-title{
+    font-weight: bold !important;
+    font-size: 30rpx !important;
+    margin: 0rpx;
+    color: black !important;
+}
+
+.task-info text{
+    font-size: 25rpx;
+    font-weight: normal;
+    margin-top: 10rpx;
+    color: #b3b3b3;
+}
+
+.reminds image{
+    width: 48rpx;
+    height: 48rpx;
+    margin-left: 20rpx;
+}
+
+.add-task{
+    width: 90rpx;
+    height: 90rpx;
+    position: fixed;
+    bottom: 200rpx;
+    right: 50rpx;
+    z-index: 3;
+    background-color: white;
+    border-radius: 45rpx;
+    box-shadow: 0rpx 5rpx 18rpx 0rpx #ababab;
+}
+
+.add-modal .list-item{
+    justify-content: unset;
+    height: 80rpx;
+}
+
+.add-modal .list-item-title{
+    width: 130rpx;
+}
+
+.detail-modal .list-item{
+    justify-content: unset;
+    height: 80rpx;
+}
+
+.detail-modal .list-item-title{
+    width: 130rpx;
+}

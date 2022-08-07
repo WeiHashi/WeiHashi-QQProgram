@@ -1,0 +1,74 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <modal-view title="添加问题" show="{{addQue}}">
+        <form bindsubmit="queSubmit">
+            <view class="list-item">
+                <text class="list-item-title add-que-title">问题</text>
+                <input name="question" value="{{none}}" placeholder="问题" />
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view class="list-item">
+                <text class="list-item-title add-que-title">问题类型</text>
+                <radio-group class="radio-group" bindchange="qtypeChange">
+                    <label class="radio">
+                        <radio style="margin-left:0rpx" checked="{{qtype=='填空'}}" class="qtype" value="填空">填空</radio>
+                    </label>
+                    <label class="radio">
+                        <radio class="qtype" checked="{{qtype=='单选'}}" value="单选">单选</radio>
+                    </label>
+                    <label class="radio">
+                        <radio class="qtype" checked="{{qtype=='多选'}}" value="多选">多选</radio>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="divider" style="margin:0rpx"></view>
+            <view wx:if="{{qtype=='填空'}}" class="list-item">
+                <text class="list-item-title add-que-title">问题描述</text>
+                <input name="des" placeholder="问题描述" />
+            </view>
+            <scroll-view scroll-y="{{true}}" wx:if="{{qtype=='单选'||qtype=='多选'}}" class="options">
+                <view class="list-item">
+                    <text class="list-item-title add-que-title">选项</text>
+                </view>
+                <block wx:for="{{options}}" wx:key="index">
+                    <view class="list-item">
+                        <text style="text-align:center" class="list-item-title">{{item.index}}</text>
+                        <input data-index="{{index}}" value="{{none}}" bindinput="optionInput" value="{{item.content}}" style="width:(100% - 200rpx)" />
+                        <text bindtap="deleteOption" data-index="{{index}}" class="delete" style="width:80rpx">删除</text>
+                    </view>
+                <view class="divider" style="margin:0rpx"></view>
+                </block>
+            </scroll-view>
+            <button form-type="submit" class="modal-button">添加</button>
+            <view wx:if="{{qtype=='单选'||qtype=='多选'}}" bindtap="addOption" class="plain-button" style="padding-top:15rpx;padding-bottom:15rpx;margin-top:20rpx">
+                添加选项
+            </view>
+        </form>
+    </modal-view>
+    <form bindsubmit="add">
+        <view class="list-item">
+            <text class="list-item-title">标题</text>
+            <input name="title" placeholder="标题" value="{{none}}" maxlength="50" style="width:100%" />
+        </view>
+        <view class="divider" style="margin:0rpx"></view>
+        <view class="list-item" style="height:300rpx;align-items:flex-start;padding-top:10rpx;padding-bottom:10rpx">
+            <text class="list-item-title">描述</text>
+            <textarea placeholder="描述" bindinput="inContent" show-confirm-bar="{{false}}" style="width:100%;height:calc(100% - 20rpx)" />
+        </view>
+        <view class="gap"></view>
+        <scroll-view class="questions" scroll-y="{{true}}">
+            <block wx:for="{{questions}}" wx:key="index">
+                <view class="list-item">
+                    <text class="index">{{index+1}}</text>
+                    <text class="question">{{item.question}}</text>
+                    <text class="type">{{util.getQuestionType(item.type)}}</text>
+                    <text class="des">{{item.des}}</text>
+                    <text class="delete" data-index="{{index}}" bindtap="deleteQuestion">删除</text>
+                </view>       
+            </block>
+        </scroll-view>
+        <button form-type="submit" style="width:400rpx;font-size:32rpx" class="modal-button">发布</button>
+    </form>
+    <view bindtap="addQue" class="plain-button" style="width:390rpx;padding-top:10rpx;padding-bottom:10rpx;font-size:32rpx;margin:0rpx auto;margin-top:15rpx">添加问题</view>
+    <text class="tip" style="margin:20rpx;margin-top:30rpx">Tips：每个班级最多可置顶3条通知或问卷(置顶通知和问卷总和不超过3条)，请妥善使用置顶功能。</text>
+</view>

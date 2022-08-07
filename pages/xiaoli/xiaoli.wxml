@@ -1,0 +1,4 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <image bindtap="preview" src="https://image.devmeteor.cn/whs/img/xiaoli.jpg?rnd={{util.getRnd()}}" />
+</view>

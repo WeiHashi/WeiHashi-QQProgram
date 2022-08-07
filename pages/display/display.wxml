@@ -1,0 +1,31 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container" style="padding-bottom:50rpx">
+    <text class="title">{{title}}</text>
+    <text class="sender">{{util.parseSender(sender,classId,className)}} 发布于{{util.parseTimestamp(timestamp)}}</text>
+    <view class="content-container">
+        <block wx:for="{{content}}" wx:key="index">
+            <text wx:if="{{item.type==1}}" class="text-content">{{item.content}}</text>
+            <image wx:if="{{item.type==2}}" src="{{item.content+'?rnd='+util.getRnd()}}" data-src="{{item.content}}" bindtap="preview" mode="aspectFit" class="image-content" style="width:{{item.w}}px;height:{{item.h}}px;border:1rpx solid #f2f2f2" data-index="{{index}}" binderror="imageError" />
+        </block>
+    </view>
+    <form wx:if="{{questions.length!=0}}" bindsubmit="qSubmit">
+        <block wx:for="{{questions}}" wx:key="id">
+            <view class="gap" style="margin-top:20rpx"></view>
+            <text class="q-title">{{item.id}}.{{item.question}}</text>
+            <input wx:if="{{item.type==0}}" name="{{item.id}}" placeholder="{{item.des}}" value="{{savedAnswer[item.id]}}" style="padding-left:20rpx;padding-right:20rpx" />
+            <radio-group name="{{item.id}}" wx:if="{{item.type==1}}">
+                <label wx:for="{{item.des}}" wx:for-item="oitem" wx:key="{{oitem.id}}" class="q-option">
+                    <radio value="{{oitem}}" checked="{{savedAnswer[item.id]==oitem}}"/> {{oitem}}
+                </label>
+            </radio-group>
+            <checkbox-group name="{{item.id}}" wx:if="{{item.type==2}}">
+                <label wx:for="{{item.des}}" wx:for-item="oitem" wx:key="{{oitem.id}}" class="q-option">
+                    <checkbox value="{{oitem}}" checked="{{util.optionChecked(savedAnswer[item.id],oitem)}}" /> {{oitem}}
+                </label>
+            </checkbox-group>
+        </block>
+        <view class="gap" style="margin-top:20rpx"></view>
+        <button form-type="submit" class="modal-button" style="margin:30rpx auto;width:60%">提交</button>
+        <text style="color:#888888;font-size:30rpx;text-align:center">重复提交将覆盖之前提交的记录</text>
+    </form>
+</view>

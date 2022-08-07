@@ -1,0 +1,74 @@
+<wxs module="util" src="../../util/util.wxs"></wxs>
+<view class="container">
+    <view class="class-info">
+        <!-- <image src="/images/xiaohui.png" /> -->
+        <view wx:if="{{instituteName!=''}}" class="class-info-text">
+            <text style="font-size:40rpx">{{instituteName}}</text>
+            <text style="font-size:35rpx">{{className}}</text>
+        </view>
+        <!-- <text wx:else style="margin-left:20px;font-size:50rpx">我的消息</text> -->
+        <view wx:else class="class-info-text">
+            <text class="class-info-prim">我的消息</text>
+            <text class="class-info-sec">微哈师最新资讯触手可及</text>
+        </view>
+    </view>
+    <view class="gap"></view>
+    <scroll-view style="height:calc(100% - 240rpx)" bindscrolltoupper="updateMessage" bindscrolltolower="loadMoreMessage" scroll-y="{{true}}">
+        <view class="mask" wx:if="{{showMask}}">{{maskText}}</view>
+        <view class="top-container">
+            <block wx:for="{{tops}}" wx:key="timestamp">
+                <view wx:if="{{index!=0}}" style="width:calc(100% - 40rpx)" class="divider"></view>
+                <view class="top-item"  data-type="{{item.source==0?'1':'2'}}" data-item="{{item}}" bindtap="display">
+                    <text style="width:45%;font-size:28rpx">{{item.title}}</text>
+                    <text style="width:15%;text-align:right;font-size:24rpx;color:#999999">{{util.parseSender(item.sender,classId,className)}}</text>
+                    <text style="width:25%;text-align:right;font-size:24rpx;color:#999999">{{util.parseTimestamp(item.timestamp)}}</text>
+                    <text style="width:15%;text-align:right;font-size:18rpx;color:{{item.source==0?'#c1272d':'#fbb03b'}}">[{{item.source==0?'置顶通知':'置顶问卷'}}]</text>
+                </view>
+            </block>
+        </view>
+        <view class="gap" wx:if="{{tops.length!=0&&normals.length!=0}}"></view>
+        <block wx:for="{{normals}}" wx:key="timestamp">
+            <view wx:if="{{item.source==0}}" data-type="1" data-item="{{item}}" bindtap="display" class="notice-item">
+                <view class="notice-info">
+                    <view class="notice-sender">
+                        <image src="/images/head_{{util.getHead(item.sender)}}.png" />
+                        <view class="notice-sender-text">
+                            <text style="font-size:30rpx">{{util.parseSender(item.sender,classId,className)}}</text>
+                            <text style="font-size:20rpx;color:#999999;margin-top:5rpx">{{util.parseTimestamp(item.timestamp)}}</text>
+                        </view>
+                    </view>
+                    <view class="notice-type">
+                        <text style="font-size:30rpx;color:#c1272d">{{util.parseCate(item.cate)}}</text>
+                        <image src="/images/message_notice.png" />
+                    </view>
+                </view>
+                <view class="notice-article">
+                    <text style="font-size:35rpx;text-overflow:ellipsis;white-space:nowrap;overflow:hidden">{{item.title}}</text>
+                    <text style="display:-webkit-box;font-size:28rpx;color:#666666;margin-top:5rpx;-webkit-line-clamp: 3;word-break: break-all;-webkit-box-orient: vertical;overflow:hidden;text-overflow:ellipsis">{{util.parseDetail(item.detail)}}</text>
+                </view>
+            </view>
+            <view wx:else class="qn-item">
+                <image src="/images/head_{{util.getHead(item.sender)}}.png" />
+                <view class="qn-content">
+                    <text style="font-size:30rpx;margin:10rpx 0rpx;margin-top:20rpx">{{util.parseSender(item.sender,classId,className)}}</text>
+                    <view class="qn-block" data-type="2" data-item="{{item}}" bindtap="display">
+                        <image src="/images/message_questionnaire.png" style="padding:3rpx" />
+                        <view style="width:1rpx;height:90rpx;background-color:#eaeaea"></view>
+                        <view style="flex-direction:column;margin-left:20rpx">
+                            <text>{{item.title}}</text>
+                            <text style="font-size:20rpx;color:#999999;margin-top:10rpx">{{util.parseTimestamp(item.timestamp)}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="divider" style="margin:0rpx;margin-top:20rpx"></view>
+        </block>
+        <view class="loading" wx:if="{{showLoading}}">
+            <image src="/images/loading.gif" />
+            <text>加载中</text>
+        </view>
+        <view class="loading" wx:if="{{showAll}}">
+            <text>到底了~~</text>
+        </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,201 @@
+var timestamp2date = function (e) {
+    var date = e.replace(getRegExp('-','g'),'/').split(' ')[0].split('/')
+    var time = e.split(' ')[1].split(':')
+    return date[0] + '年' + date[1] + '月' + date[2] + '日 ' + time[0] + ':' + time[1]
+}
+
+var date2timestamp = function (e) {
+    var date = getDate(e)
+    var yyyy = date.getFullYear()
+    var MM = date.getMonth() + 1
+    var dd = date.getDate()
+    var HH = date.getHours()
+    var mm = date.getMinutes()
+    return {
+        date: yyyy + '/' + MM + '/' + dd,
+        time: (HH < 10 ? '0' + HH : HH) + ':' + (mm < 10 ? '0' + mm : mm)
+    }
+}
+
+var earlyThanNow = function (e) {
+    var now = getDate()
+    var date = getDate(e.replace(getRegExp('-','g'),'/'))
+    return now.getTime() - date.getTime() > 0
+}
+
+var checkElem = function (arr, elem) {
+    return arr.indexOf(elem) > -1
+}
+
+var getMonth = function (e) {
+    return getDate(e.replace(getRegExp('-','g'),'/')).getMonth() + 1
+}
+
+var getWeekDate = function (startStr, index) {
+    var start = getDate(startStr.replace(getRegExp('-','g'),'/'))
+    var date = getDate(start.getTime() + index * 24 * 60 * 60 * 1000)
+    var month = (date.getMonth() + 1 < 10) ? ('0' + (date.getMonth() + 1)) : date.getMonth() + 1
+    var day = (date.getDate() < 10) ? ('0' + date.getDate()) : date.getDate()
+    return month + '/' + day
+}
+
+var ifToday = function (e, index) {
+    var date = getDate(getDate(e).getTime() + index * 24 * 60 * 60 * 1000)
+    var now = getDate()
+    return date.getFullYear() == now.getFullYear() && date.getMonth() == now.getMonth() && date.getDate() == now.getDate()
+}
+
+var ifThisYear=function(l){
+    var date=getDate(l)
+    var now=getDate()
+    return date.getFullYear()==now.getFullYear()
+}
+
+var getML = function (week) {
+    switch (week) {
+        case '星期一':
+            return '9%';
+        case '星期二':
+            return '22%';
+        case '星期三':
+            return '35%';
+        case '星期四':
+            return '48%';
+        case '星期五':
+            return '61%';
+        case '星期六':
+            return '74%';
+        case '星期日':
+            return '87%';
+    }
+}
+
+var getScoreColor = function (e) {
+    var score = parseFloat(e)
+    if (score == 0)
+        return '#ababab'
+    if (score < 60)
+        return '#ff0000'
+    if (score < 90)
+        return '#009245'
+    return '#fbb03b'
+}
+
+var parseSender = function (json, classId, className) {
+    if (json == 'Meteor')
+        return json
+    var obj = JSON.parse(json)
+    if (obj.id_type == 1 && obj.id == classId)
+        return className
+    if(obj.id_type==2)
+        return obj.id
+}
+
+var parseTimestamp = function (l) {
+    var timestamp = date2timestamp(l)
+    if (ifToday(l, 0))
+        return timestamp.time
+    if(ifBeforeDay(l,1))
+        return '昨天 '+timestamp.time
+    if(ifBeforeDay(l,2))
+        return '前天 '+timestamp.time
+    if(ifThisYear(l))
+        return timestamp.date.split('/')[1]+'月'+timestamp.date.split('/')[2]+'日 '+timestamp.time
+    return timestamp.date.replace('/', '年').replace('/', '月') + '日'
+}
+
+var ifBeforeDay = function (l, i) {
+    var date = getDate(l)
+    var beforeDay = getDate(getDate().getTime() - i * 24 * 60 * 60 * 1000)
+    return date.getFullYear() == beforeDay.getFullYear() && date.getMonth() == beforeDay.getMonth() && date.getDate() == beforeDay.getDate()
+}
+
+var getHead = function (json) {
+    if (json == 'Meteor')
+        return json
+    else
+        switch (JSON.parse(json).id_type) {
+            case 1:
+                return 'admin'
+            default:
+                return 'cadre'
+        }
+}
+
+var parseCate = function (cate) {
+    switch (parseInt(cate)) {
+        case 0:
+            return '系统'
+        case 1:
+            return '课程'
+        case 2:
+            return '考试'
+        case 3:
+            return '放假'
+        case 4:
+            return '其他'
+    }
+}
+
+var getQuestionType=function(code){
+    switch(code){
+        case 0:
+            return '填空'
+        case 1:
+            return '单选'
+        case 2:
+            return '多选'
+    }
+}
+
+var parseDetail=function(e){
+    var data=JSON.parse(e)
+    var final=[]
+    for(var i=0;i<data.length;i++)
+        if(data[i].type==1)
+            final.push(data[i].content)
+    return final.join(' ')
+}
+
+var optionChecked=function(option,oitem){
+    return option.indexOf(oitem)>-1
+}
+
+var pl=function(e){
+    console.log(JSON.stringify(e))
+}
+
+var getRnd=function(){
+    return Math.random()
+}
+
+var termId2term=function(e){
+    return e.replace('t','')
+}
+
+var getTermNum=function(terms,term){
+    return terms.indexOf(term)
+}
+
+module.exports = {
+    timestamp2date: timestamp2date,
+    checkElem: checkElem,
+    date2timestamp: date2timestamp,
+    earlyThanNow: earlyThanNow,
+    getMonth: getMonth,
+    getWeekDate: getWeekDate,
+    ifToday: ifToday,
+    getML: getML,
+    getScoreColor: getScoreColor,
+    parseSender: parseSender,
+    parseTimestamp: parseTimestamp,
+    parseCate: parseCate,
+    getHead: getHead,
+    getQuestionType:getQuestionType,
+    parseDetail:parseDetail,
+    optionChecked:optionChecked,
+    pl:pl,
+    getRnd:getRnd,
+    termId2term:termId2term,
+    getTermNum:getTermNum
+}

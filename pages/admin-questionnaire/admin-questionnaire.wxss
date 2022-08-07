@@ -1,0 +1,94 @@
+.container{
+    padding-top: 20rpx;
+}
+
+.list-item-title{
+    width: 80rpx !important;
+    margin-right: 20rpx !important;
+}
+
+.add-que-title{
+    width: 130rpx !important;
+}
+
+.top{
+    font-size: 30rpx;
+    margin-left: 20rpx;
+    margin-top: 10rpx;
+}
+
+.top .wx-checkbox-input{
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.top .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 20rpx;
+  height: 20rpx;  
+  line-height: 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.questions{
+    flex-direction: column;
+    min-height: 30rpx;
+    max-height: 400rpx;
+}
+
+.index{
+    width: 10%;
+    text-align: center;
+}
+
+.question,.des{
+    width: 35%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 2rpx;
+    padding-right: 2rpx;
+}
+
+.type{
+    width: 10%;
+    text-align: center;
+}
+
+.delete{
+    width:10%;
+    text-align: center;
+    color: #ff0000;
+}
+
+.qtype{
+    margin-left: 15rpx;
+}
+
+.qtype .wx-radio-input{
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 10rpx;
+}
+
+.qtype .wx-radio-input.wx-radio-input-checked::before {
+    width: 20rpx;
+    height: 20rpx;  
+    line-height: 20rpx;
+    text-align: center;
+    font-size: 22rpx;
+    color: #fff;
+    background: transparent;
+    transform: translate(-50%, -50%) scale(1);
+    -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.options{
+    flex-direction: column;
+    max-height: 500rpx;
+    min-height: 0rpx;
+}

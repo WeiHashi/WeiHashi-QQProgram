@@ -1,0 +1,30 @@
+.container{
+    padding-top: 20rpx;
+}
+
+.list-item-title{
+    width: 80rpx !important;
+}
+
+.top{
+    font-size: 30rpx;
+    margin-left: 20rpx;
+    margin-top: 10rpx;
+}
+
+.top .wx-checkbox-input{
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.top .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 20rpx;
+  height: 20rpx;  
+  line-height: 20rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

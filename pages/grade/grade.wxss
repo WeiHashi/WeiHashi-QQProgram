@@ -1,0 +1,98 @@
+.top-container{
+    padding-top: 20rpx;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gpa{
+    margin-left: 20rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.update{
+    width: 180rpx;
+    height: 30rpx;
+    align-self: flex-end;
+    margin: 0rpx 20rpx;
+    padding-bottom: 10rpx;
+}
+
+.card{
+    width: calc(100% - 40rpx);
+    margin: 30rpx 20rpx;
+    background-color: white;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 20rpx;
+    padding: 20rpx;
+    padding-bottom: 30rpx;
+}
+  
+.card-header{
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.lesson{
+    max-width: calc(100% - 180rpx);
+    font-size: 40rpx;
+    font-weight: bold;
+}
+
+.total{
+    align-items: baseline;
+}
+
+.total text{
+    font-size: 28rpx;
+}
+
+.score{
+    font-size: 48rpx !important;
+    color: #009245;
+    font-weight: bold;
+}
+
+.card-row{
+    margin-top: 20rpx;
+}
+
+.card-row text{
+    font-size: 26rpx;
+    margin-right: 20rpx;
+    box-sizing: border-box;
+}
+.code-image{
+    height: 60rpx;
+    width: 150rpx;
+}
+
+.term-divider{
+    height: 1rpx;
+    width: calc(100% - 40rpx);
+    background-color: #ababab;
+    justify-content: center;
+    align-items: center;
+    margin:50rpx 20rpx
+}
+
+.term-divider text{
+    background-color: #f2f2f2;
+    font-size: 30rpx;
+    color: #ababab;
+    padding: 0rpx 10rpx;
+}
+
+.filter{
+    width: 90rpx;
+    height: 90rpx;
+    position: fixed;
+    bottom: 200rpx;
+    right: 50rpx;
+    z-index: 3;
+    background-color: white;
+    border-radius: 45rpx;
+    box-shadow: 0rpx 5rpx 18rpx 0rpx #ababab;
+}

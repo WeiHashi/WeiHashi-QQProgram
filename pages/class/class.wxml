@@ -1,0 +1,39 @@
+<view class="container">
+    <text class="tip" style="text-indent:0em">Tips：</text>
+    <text class="tip">1.如何使用班级功能？</text>
+    <text class="tip">将下方展示的id提供给班级管理员，由班级管理员将用户添加到班级中，若id显示异常请联系开发者解决。</text>
+    <text class="tip">2.加入班级可以做什么？</text>
+    <text class="tip">①接收班级管理员发布的通知。</text>
+    <text class="tip">②接收和填写班级管理员发布的问卷。</text>
+    <text class="tip">③被班级管理员设置为班干部后可点击下方的图标发布班级通知和问卷。</text>
+    <text class="tip">3.班级管理员是谁？</text>
+    <text class="tip">班级管理员独立于用户外的角色，拥有班级的最高管理权限。班级管理员账号经申请审核通过后下发给班长或团支书，详细申请方式请班长或团支书联系开发者获取。
+    </text>
+    <text class="tip">4.如何转出和转入班级？</text>
+    <text class="tip">由当前所在班级的班级管理员将用户移出当前所在班级后，用户将上方展示的id提供给新班级的班级管理员，由班级管理员将用户添加到班级中。</text>
+    <view class="id-container">
+        <text>id:{{id}}</text>
+        <text style="color:#0071bc;font-size:25rpx;margin-left:10rpx" bindtap="copyId">点击复制</text>
+    </view>
+    <view class="join-block" wx:if="{{classId==''}}">
+        <input bindinput="inId" class="in-classid" placeholder="请输入班级id" />
+        <view bindtap="joinClass">加入班级</view>
+    </view>
+    <view class="admin-block" wx:if="{{isCadre}}">
+        <text style="font-size:50rpx;margin-top:20rpx">发布</text>
+        <view class="functions">
+            <navigator url="/pages/admin-notice/admin-notice">
+                <view class="function-block">
+                    <image src="/images/notice.png" />
+                    <text>通知</text>
+                </view>
+            </navigator>
+            <navigator url="/pages/admin-questionnaire/admin-questionnaire">
+                <view class="function-block">
+                    <image src="/images/questionnaire.png" />
+                    <text>问卷</text>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>

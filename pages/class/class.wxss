@@ -1,0 +1,69 @@
+.container{
+    padding: 20rpx;
+    box-sizing: border-box;
+}
+
+.id-container{
+    align-items: baseline;
+    justify-content: center;
+    margin-top: 10rpx;
+    font-size: 30rpx;
+}
+
+.join-block{
+    justify-content: center;
+    margin-top: 20rpx;
+}
+
+.join-block input{
+    height: 100%;
+    background-color: white;
+    border: 5rpx solid #c1272d;
+    font-size: 40rpx;
+    padding-left: 10rpx;
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+}
+
+.join-block view{
+    text-align: center;
+    align-items: center;
+    background-color: #c1272d;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
+    color: white;
+    font-size: 35rpx;
+    border-top-right-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+}
+
+.admin-block{
+    flex-direction: column;
+    margin-top: 20rpx;
+}
+
+.functions{
+    margin-top: 20rpx
+}
+
+navigator{
+    margin-left: 10rpx;
+    padding: 10rpx;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.function-block{
+    flex-direction: column;
+    align-items: center;
+}
+
+.function-block image{
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.function-block text{
+    margin-top: 10rpx;
+    font-size: 29rpx;
+}

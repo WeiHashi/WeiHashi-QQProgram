@@ -1,0 +1,10 @@
+<view class="container">
+    <view class="gap"></view>
+    <view hover-class="navigator-hover" bindtap="clear" class="list-item">
+        <text>清除数据</text>
+    </view>
+    <view class="divider"></view>
+    <view class="list-item" bindtap="clearAll" hover-class="navigator-hover">
+        <text style="color:#ff0000">清除全部数据</text>
+    </view>
+</view>

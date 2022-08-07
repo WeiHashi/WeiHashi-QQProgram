@@ -1,0 +1,14 @@
+<view class="container">
+    <image src="/images/whs.png" />
+    <text class="app-name">微哈师</text>
+    <view class="divider"></view>
+    <text style="width:100%;padding-left:70rpx">申请获得以下权限：</text>
+    <text class="detail privacy-info">获得您的公开信息（昵称、头像）</text>
+    <view class="detail" style="margin-top:50rpx;margin-left:70rpx;word-break:break-all;align-self:flex-start">点击授权按钮即表示已同意：</view>
+    <view style="margin-top:10rpx">
+    <navigator url="/pages/about/about" style="color:#0071bc;align-self:flex-start">《微哈师用户协议》</navigator>
+    和
+    <navigator url="/pages/privacy/privacy" style="color:#0071bc;align-self:flex-start">《隐私说明》</navigator>
+    </view>
+    <button  open-type="getUserInfo" bindgetuserinfo="auth" class="modal-button">授权</button>
+</view>

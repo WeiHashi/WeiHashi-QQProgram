@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/timetable/timetable",
+    "pages/display/display",
+    "pages/about/about",
+    "pages/auth/auth",
+    "pages/task/task",
+    "pages/admin-questionnaire/admin-questionnaire",
+    "pages/admin-notice/admin-notice",
+    "pages/class/class",
+    "pages/grade/grade",
+    "pages/message/message",
+    "pages/user/user",
+    "pages/settings/settings",
+    "pages/xiaoli/xiaoli",
+    "pages/privacy/privacy"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "微哈师",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "modal-view": "/components/modal-view/modal-view"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#c1272d",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home_normal.png",
+        "selectedIconPath": "images/home_selected.png"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "images/message_normal.png",
+        "selectedIconPath": "images/message_selected.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/user_normal.png",
+        "selectedIconPath": "images/user_selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
